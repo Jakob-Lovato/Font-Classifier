@@ -32,14 +32,20 @@ Here are some sample training images:
 On a test set of data generated the same way as the training data, the model achieved about 89% accuracy of correctly classifying the font. However, this number really isn't very useful or meaningful as it is again using sterile synthetic data, and again, the point of the model is to take in images of text using fonts that aren't even in the trianing data, and to suggest the most similar matches.
 
 Here are some examples of real world predictions. The first image is the uploaded image to be classified. The three images following it are screenshots from Google Fonts of each of the top 3 suggested fonts.
+
 <img width="605" alt="Screen Shot 2022-08-16 at 2 47 10 PM" src="https://user-images.githubusercontent.com/106411094/184991074-a2116c0b-0eb2-4371-8176-cfb07b2820db.png">
+
 The three suggested fonts are:
+
 Source Serif Pro - Regular
+
 <img width="233" alt="Screen Shot 2022-08-16 at 2 48 07 PM" src="https://user-images.githubusercontent.com/106411094/184991216-1ed50af1-eeaa-4ed1-b781-4ec7c1d1c016.png">
 
 Cormorant Garamond - Bold
+
 <img width="201" alt="Screen Shot 2022-08-16 at 2 48 36 PM" src="https://user-images.githubusercontent.com/106411094/184991299-a9d80bd6-2cf3-441b-b185-5c3a6c935c87.png">
 
 Nanum Myeongjo - Bold
+
 <img width="198" alt="Screen Shot 2022-08-16 at 2 49 04 PM" src="https://user-images.githubusercontent.com/106411094/184991351-acfd7022-4057-4a83-8c5f-136f926b7152.png">
 
