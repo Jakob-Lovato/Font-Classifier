@@ -11,7 +11,7 @@ It is a common task of graphic designers to try and find the names of fonts seen
 
 This model uses a convolutional neural network using Keras to identify fonts or suggest similar fonts to the user's input which are freely available on Google Fonts. I chose a subset of 200 of the most popular fonts on Google Fonts due to limited computing power. Due to this, the point of the model is not to identify all fonts (there are hundreds of thousands? Millions?) but rather to suggest similar fonts to the one the user is trying to identify, since it is most likely that the text contained in user input isn't even from a font that is in the training data at all.
 
-Because individual characters alone are not enough to train a CNN to identify fonts (each character is so vastly different on it's own, no patterns would be able to be picked up), I used the dataset to create a synthetic training set by creating 250 random combinations of upper & lower case letters, as well as the ten digits. Each training image was also given random kerning (the typographic term for the spacing between letters) so that the model wouldn't accidentally be trained to identify based on kerning.
+Because individual characters alone are not enough to train a CNN to identify fonts (each character is so vastly different on it's own, no patterns would be able to be picked up), I used the dataset to create a synthetic training set by creating 250 random combinations of upper & lower case letters, as well as the ten digits. Each training image was also given random kerning (the typographic term for the spacing between letters) so that the model wouldn't accidentally be trained to identify based on kerning. Each training image consists of five characters. Again, this was to save on computing power and time. It is easier to ask the user to crop their image to contain five letters, but not possible to have them adjust the kerning in their image typically, so I placed value on variable kerning over variable combination length in the training data.
 
 Here are some sample training images:
 
@@ -68,4 +68,6 @@ Cinzel Decorative - Regular
 
 <img width="441" alt="Screen Shot 2022-08-16 at 3 27 03 PM" src="https://user-images.githubusercontent.com/106411094/184995927-afb08893-9ec5-405c-9308-d7a6926bc823.png">
 
-Here, the second suggestion is by far the most accurate. Sometimes with more edge cases (very thin fonts, very decorative fonts, etc.), the results vary like this case. But typically if the first font isn't a match, the second or third ones are pretty close. This could probably be improved with more training.
+Here, the second suggestion is by far the most accurate. Sometimes with more edge cases (very thin fonts, very decorative fonts, etc.), the results vary like this case. But typically if the first font isn't a match, the second or third ones are pretty close. This could probably be improved with more training. 
+
+Overall, the model seems to perform well in picking generally similar (and sometimes very similar) fonts to user input. If the user uploads an image of bold face serif text, the results will likely be bold face serif fonts, etc. Decorative fonts and other edge cases don't perform as well right now.
