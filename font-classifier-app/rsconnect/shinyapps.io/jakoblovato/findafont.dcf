@@ -1,0 +1,13 @@
+name: findafont
+title: findafont
+username:
+account: jakoblovato
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6735856
+bundleId: 6204349
+url: https://jakoblovato.shinyapps.io/findafont/
+when: 1660602223.71322
+lastSyncTime: 1660602223.71324
+asMultiple: FALSE
+asStatic: FALSE
