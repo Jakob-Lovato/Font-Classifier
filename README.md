@@ -9,7 +9,7 @@ This dataset contains over over 281,000 images of individual letters and charact
 
 It is a common task of graphic designers to try and find the names of fonts seen in the real world (i.e. billboards, movie posters, other graphic designers' works, etc.), to use in their own works. This can be challanging, as unless one knows who made the design or has a very trained eye for fonts, typically asking around is the only way to discover what the font is.
 
-This model uses a convolutional neural network to identify fonts or suggest similar fonts to the user's input which are freely available on Google Fonts. I chose a subset of 200 of the most popular fonts on Google Fonts due to limited computing power. Due to this, the point of the model is not to identify all fonts (there are hundreds of thousands? Millions?) but rather to suggest similar fonts to the one the user is trying to identify. 
+This model uses a convolutional neural network using Keras to identify fonts or suggest similar fonts to the user's input which are freely available on Google Fonts. I chose a subset of 200 of the most popular fonts on Google Fonts due to limited computing power. Due to this, the point of the model is not to identify all fonts (there are hundreds of thousands? Millions?) but rather to suggest similar fonts to the one the user is trying to identify, since it is most likely that the text contained in user input isn't even from a font that is in the training data at all.
 
 Because individual characters alone are not enough to train a CNN to identify fonts (each character is so vastly different on it's own, no patterns would be able to be picked up), I used the dataset to create a synthetic training set by creating 250 random combinations of upper & lower case letters, as well as the ten digits. Each training image was also given random kerning (the typographic term for the spacing between letters) so that the model wouldn't accidentally be trained to identify based on kerning.
 
@@ -29,4 +29,17 @@ Here are some sample training images:
 
 <img width="478" alt="Screen Shot 2022-08-16 at 2 37 42 PM" src="https://user-images.githubusercontent.com/106411094/184989775-cd3bea79-6dbe-4c04-a94f-2d73efa89c5c.png">
 
+On a test set of data generated the same way as the training data, the model achieved about 89% accuracy of correctly classifying the font. However, this number really isn't very useful or meaningful as it is again using sterile synthetic data, and again, the point of the model is to take in images of text using fonts that aren't even in the trianing data, and to suggest the most similar matches.
+
+Here are some examples of real world predictions. The first image is the uploaded image to be classified. The three images following it are screenshots from Google Fonts of each of the top 3 suggested fonts.
+<img width="605" alt="Screen Shot 2022-08-16 at 2 47 10 PM" src="https://user-images.githubusercontent.com/106411094/184991074-a2116c0b-0eb2-4371-8176-cfb07b2820db.png">
+The three suggested fonts are:
+Source Serif Pro - Regular
+<img width="233" alt="Screen Shot 2022-08-16 at 2 48 07 PM" src="https://user-images.githubusercontent.com/106411094/184991216-1ed50af1-eeaa-4ed1-b781-4ec7c1d1c016.png">
+
+Cormorant Garamond - Bold
+<img width="201" alt="Screen Shot 2022-08-16 at 2 48 36 PM" src="https://user-images.githubusercontent.com/106411094/184991299-a9d80bd6-2cf3-441b-b185-5c3a6c935c87.png">
+
+Nanum Myeongjo - Bold
+<img width="198" alt="Screen Shot 2022-08-16 at 2 49 04 PM" src="https://user-images.githubusercontent.com/106411094/184991351-acfd7022-4057-4a83-8c5f-136f926b7152.png">
 
