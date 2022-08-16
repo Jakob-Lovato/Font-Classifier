@@ -3,6 +3,8 @@
 library(tidyverse)
 library(keras)
 library(jpeg)
+library(imager)
+library(imagerExtra)
 
 # Read in data
 tmnist <- read.csv("/Users/jakoblovato/Desktop/Projects/Font Classifier/94_character_TMNIST.csv",
@@ -57,13 +59,6 @@ data$names %>%
   levels() %>%
   length()
 
-
-# Save this new smaller dataset to save on storage (the full dataset
-# is over 900MB, the reduced dataset is about 23 MB)
-
-#write.table(data, file = "62_char_200_font_tmnist", row.names = FALSE)
-
-
 # There are 1322 font families, still too many I think to allow for enough training
 # data to be made and to not run for too long... I decided to pick 200 fonts manually,
 # based on popularity rankings from Google Fonts
@@ -113,6 +108,12 @@ data <- data %>%
 
 data$names <- data$names %>%
   droplevels()
+
+
+# Save this new smaller dataset to save on storage (the full dataset
+# is over 900MB, the reduced dataset is about 23 MB)
+
+#write.table(data, file = "62_char_200_font_tmnist", row.names = FALSE)
 
 # Check number of fonts: there are now 200
 data$names %>% 
@@ -367,87 +368,44 @@ y_test[125,] %>%
   {which((.) == 1)} %>%
   {decode_result((.) - 1)}
 
-# Classify a non-synthetic test point! Upload screenshot of random font and get 
-# similar fonts as output
-# One font I know is not in the dataset is Helvetica, so I will test that font
+# Classify a non-synthetic test point!
+# Try photo
 
 library(imager)
-helvetica <- load.image("/Users/jakoblovato/Desktop/Projects/Font Classifier/Test Images/helvetica_hello_cropped.png")
-str(helvetica)
-
-# Reshape image
-helvetica <- helvetica %>% 
-  resize(size_x = 140, size_y = 28, size_c = 1, interpolation_type = 2) %>%
-  as.array() %>%
-  aperm(c(3, 2, 1, 4))
-
-# Make background 0, foreground 1
-helvetica <- 1 - helvetica
-
-# Standardize
-helvetica <- (helvetica - mean(helvetica)) / sd(helvetica)
-helvetica <- (helvetica - min(helvetica)) / (max(helvetica) - min(helvetica))
-plot(as.raster(helvetica[1,,,]))
-
-get_top_3_classes(helvetica, model)
-
-# Now try a photograph of text to see how it can classify
 library(imagerExtra)
-lavender <- load.image("/Users/jakoblovato/Desktop/Projects/Font Classifier/Test Images/lavener.png")
-str(lavender)
 
-# Reshape image and converto to greyscale and adjust black and white threshold
-lavender <- lavender %>%
-  grayscale() %>%
-  ThresholdTriclass(stopval = 0.01) %>%
-  resize(size_x = 140, size_y = 28, size_c = 1, interpolation_type = 2) %>%
-  as.array() %>%
-  aperm(c(3, 2, 1, 4))
+# Function to automate the pre-processing
+process_input_image <- function(image){
+  image <- grayscale(image)
+  # Pull color from side of image to pad sides with
+  pad_color_left <- image[1, dim(image)[2] / 2, 1, 1]
+  pad_color_right <- image[dim(image)[1], dim(image)[2] / 2, 1, 1]
+  image <- image %>%
+    pad(nPix = ((dim(image)[2] / 28 * 140) - dim(image)[1]) / 2, 
+        axes = "x", pos = -1, val = pad_color_left) %>%
+    pad(nPix = ((dim(image)[2] / 28 * 140) - dim(image)[1]) / 2, 
+        axes = "x", pos = 1, val = pad_color_right) %>%
+    # Adjust color levels
+    ThresholdTriclass(stopval = 0.01) %>%
+    resize(size_x = 140, size_y = 28, size_c = 1, interpolation_type = 2) %>%
+    as.array() %>%
+    aperm(c(3, 2, 1, 4))
+  
+  #If background is white and text is black
+  if(image[1,1,1,1] == 1 | image[1,nrow(image), ncol(image),1] == 1 |
+     image[1,1, ncol(image),1] == 1 | image[1,nrow(image), 1,1] == 1){
+    image <- 1 - image
+  }
+  return(image)
+}
 
-plot(as.raster(lavender[1,,,]))
 
-# Make background 0, foreground 1
-lavender <- 1 - lavender
+ender <- load.image("/Users/jakoblovato/Desktop/Projects/Font Classifier/Test Images/ender.jpg") %>%
+  process_input_image()
+get_top_3_classes(ender, model)
 
-lavender <- (lavender - mean(lavender)) / sd(lavender)
-lavender <- (lavender - min(lavender)) / (max(lavender) - min(lavender))
-
-
-plot(as.raster(lavender[1,,,]))
-
-get_top_3_classes(lavender, model)
-
-# The predictions don't look very accurate when cross-checking the actual fonts
-# on Google fonts... perhaps because this image has 6 letters instead of 5
-lavender_5 <- load.image("/Users/jakoblovato/Desktop/Projects/Font Classifier/Test Images/lavender_5_letters.png")
-
-lavender_5 <- lavender_5 %>%
-  rm.alpha() %>% #remove alpha color channel since I annotated this image to crop to 5 letters
-  grayscale() %>%
-  ThresholdTriclass(stopval = 0.01) %>%
-  resize(size_x = 140, size_y = 28, size_c = 1, interpolation_type = 2) %>%
-  as.array() %>%
-  aperm(c(3, 2, 1, 4))
-
-lavender_5 <- 1 - lavender_5
-plot(as.raster(lavender_5[1,,,]))
-
-get_top_3_classes(lavender_5, model)
-# Suggested fonts now look a bit more accurate...
-
-# Try another image
-chili <- load.image("/Users/jakoblovato/Desktop/Projects/Font Classifier/Test Images/chili.png")
-chili <- chili %>%
-  rm.alpha() %>% #remove alpha color channel since I annotated this image to crop to 5 letters
-  grayscale() %>%
-  ThresholdTriclass(stopval = 0.01) %>%
-  resize(size_x = 140, size_y = 28, size_c = 1, interpolation_type = 2) %>%
-  as.array() %>%
-  aperm(c(3, 2, 1, 4))
-
-chili <- 1 - chili
-plot(as.raster(chili[1,,,]))
-
-get_top_3_classes(chili, model)
-# Here, the 1.1% suggestion (Righteous) looks far more similar to the font in the
-# photo than the 85.87% suggestion (Barlow Bold) does
+# The top 3 classes are 
+# Sources Serif Pro - Regular
+# Cormorant Garamond - Bold
+# Nanum Myeongjo - Bold
+# All of which are serif fonts looking similar to the screenshot
