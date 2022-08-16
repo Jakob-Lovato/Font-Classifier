@@ -15,12 +15,18 @@ Because individual characters alone are not enough to train a CNN to identify fo
 
 Here are some sample training images:
 
-![image](https://user-images.githubusercontent.com/106411094/184989152-de131693-eb51-4743-81d1-31f23e056d91.png)
+<img width="481" alt="Screen Shot 2022-08-16 at 2 35 59 PM" src="https://user-images.githubusercontent.com/106411094/184989535-24782348-e020-406d-a64d-42d00f472725.png">
 
-![image](https://user-images.githubusercontent.com/106411094/184989185-ab2b7846-318d-4756-b110-8aa105981100.png)
+<img width="480" alt="Screen Shot 2022-08-16 at 2 36 14 PM" src="https://user-images.githubusercontent.com/106411094/184989574-55503d8d-52dd-4b5d-88a1-3618fab1dd21.png">
 
-![image](https://user-images.githubusercontent.com/106411094/184989222-828d57f2-8d09-4a9e-b184-6a03098257f4.png)
+<img width="479" alt="Screen Shot 2022-08-16 at 2 36 37 PM" src="https://user-images.githubusercontent.com/106411094/184989614-183f5ebf-9d0e-4875-a1b3-efa91cdcb1f3.png">
 
-![image](https://user-images.githubusercontent.com/106411094/184989253-20c5c196-fdfe-4fdf-89b0-c91220848506.png)
+<img width="479" alt="Screen Shot 2022-08-16 at 2 36 51 PM" src="https://user-images.githubusercontent.com/106411094/184989647-ed217c41-a406-43b4-84c3-435b2cb9f172.png">
 
-![image](https://user-images.githubusercontent.com/106411094/184989298-5c53f735-3de4-4316-b312-aa4ae5b71318.png)
+<img width="479" alt="Screen Shot 2022-08-16 at 2 37 07 PM" src="https://user-images.githubusercontent.com/106411094/184989681-070615ca-5d15-479b-9524-43543fa0090d.png">
+
+<img width="479" alt="Screen Shot 2022-08-16 at 2 37 20 PM" src="https://user-images.githubusercontent.com/106411094/184989722-3dc10200-c338-4c5f-9ac4-ed8e258ae054.png">
+
+<img width="478" alt="Screen Shot 2022-08-16 at 2 37 42 PM" src="https://user-images.githubusercontent.com/106411094/184989775-cd3bea79-6dbe-4c04-a94f-2d73efa89c5c.png">
+
+
