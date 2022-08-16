@@ -49,3 +49,23 @@ Nanum Myeongjo - Bold
 
 <img width="198" alt="Screen Shot 2022-08-16 at 2 49 04 PM" src="https://user-images.githubusercontent.com/106411094/184991351-acfd7022-4057-4a83-8c5f-136f926b7152.png">
 
+
+Sometimes the results are more hit or miss:
+
+<img width="592" alt="Screen Shot 2022-08-16 at 3 24 45 PM" src="https://user-images.githubusercontent.com/106411094/184995695-816832e4-2e67-4810-981e-4778804d693d.png">
+
+The three suggested fonts are:
+
+Sacramento - Regular
+
+<img width="323" alt="Screen Shot 2022-08-16 at 3 26 11 PM" src="https://user-images.githubusercontent.com/106411094/184995839-6c3d532e-f48a-46be-b490-3cb642b84506.png">
+
+Poiret One - Regular
+
+<img width="334" alt="Screen Shot 2022-08-16 at 3 26 30 PM" src="https://user-images.githubusercontent.com/106411094/184995871-56510c44-0e1b-43d2-bc17-bbf2dce74a32.png">
+
+Cinzel Decorative - Regular
+
+<img width="441" alt="Screen Shot 2022-08-16 at 3 27 03 PM" src="https://user-images.githubusercontent.com/106411094/184995927-afb08893-9ec5-405c-9308-d7a6926bc823.png">
+
+Here, the second suggestion is by far the most accurate. Sometimes with more edge cases (very thin fonts, very decorative fonts, etc.), the results vary like this case. But typically if the first font isn't a match, the second or third ones are pretty close. This could probably be improved with more training.
